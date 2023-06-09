@@ -57,7 +57,6 @@ public class Window extends PageContainer {
      * Window控制器
      */
     public class WindowController {
-
         public void enterHomePage() {
             List<Fragment> allPages = getAllPages();
             for (int i = 0; i < allPages.size(); i++) {
