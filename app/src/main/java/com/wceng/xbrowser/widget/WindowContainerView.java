@@ -12,7 +12,7 @@ import com.wceng.xbrowser.util.WindowManager;
 
 public class WindowContainerView extends FrameLayout implements Observable {
 
-    WindowManager mWindowManager;
+    private WindowManager mWindowManager;
 
     public WindowContainerView(@NonNull Context context) {
         super(context);
@@ -20,13 +20,11 @@ public class WindowContainerView extends FrameLayout implements Observable {
 
     public WindowContainerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initData();
+        mWindowManager = new WindowManager(getContext(), this);
+
         initWindow();
     }
 
-    private void initData() {
-        mWindowManager = new WindowManager(getContext(), this);
-    }
 
     private void initWindow() {
         mWindowManager.addHomeWindow();
@@ -36,7 +34,8 @@ public class WindowContainerView extends FrameLayout implements Observable {
         addView(window);
     }
 
-    public WindowManager getWindowManager() {
-        return mWindowManager;
+    public Window getCurWindow(){
+        return mWindowManager.getCurWindow();
     }
+
 }

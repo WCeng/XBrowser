@@ -45,7 +45,6 @@ public class SearchPage extends BasePage {
         initView();
         inputEventListener();
         initEvent();
-
     }
 
     private void initView() {

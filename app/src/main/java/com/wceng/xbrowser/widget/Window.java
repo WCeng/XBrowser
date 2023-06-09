@@ -83,6 +83,7 @@ public class Window extends PageContainer {
                 }
             }
             WebPage webPage = mPageFactory.createWebPage();
+            webPage.loadUrl(url);
             addPage(webPage);
             showPage(webPage);
         }

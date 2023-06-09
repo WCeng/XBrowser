@@ -21,9 +21,6 @@ public class WebPage extends BasePage {
     private FragmentWebBinding mBinding;
     private XWebView mWebView;
 
-    @Nullable
-    private String searchContent;
-
     public static WebPage newInstance(Window window) {
         WebPage fragment = new WebPage();
         fragment.setWindow(window);
@@ -40,25 +37,20 @@ public class WebPage extends BasePage {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        parseSearchContent();
         initWebView();
         initView();
-
     }
 
     private void initWebView() {
         mWebView = XWebView.newInstance(requireContext());
-        mWebView.loadUrl(searchContent);
+    }
+
+    public void loadUrl(String url){
+        mWebView.loadUrl(url);
     }
 
     private void initView() {
         mBinding.webViewContainer.addView(mWebView);
-    }
-
-    private void parseSearchContent() {
-        if (getArguments() != null) {
-            searchContent = getArguments().getString(TEXT_SEARCH_CONTENT);
-        }
     }
 
     @Override
@@ -83,7 +75,4 @@ public class WebPage extends BasePage {
         }
     }
 
-    public XWebView getWebView() {
-        return mWebView;
-    }
 }
