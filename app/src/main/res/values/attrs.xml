@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="generalBackgroundColor" format="color"/>
+    <attr name="iconTintColor" format="color"/>
+    <attr name="clickRipperColor" format="color"/>
+    <attr name="windowBackgroundColor" format="color"/>
+</resources>

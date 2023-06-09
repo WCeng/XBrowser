@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp_search_box_height">45dp</dimen>
+    <dimen name="dp_bottom_nav_title_radius">20dp</dimen>
+    <dimen name="dp_bottom_nav_title_width">100dp</dimen>
+    <dimen name="dp_bottom_nav_btn_width">70dp</dimen>
+    <dimen name="dp_home_logo_width_height">120dp</dimen>
+    <dimen name="dp_home_bottom_nav_height">50dp</dimen>
+    <dimen name="dp_search_bottom_search_bar_height">50dp</dimen>
+    <dimen name="dp_imageview_width_height">45dp</dimen>
+    <dimen name="dp_et_text_size">13sp</dimen>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="iconSize">20dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">?attr/iconTintColor</item>
+        <item name="rippleColor">?attr/clickRipperColor</item>
+        <item name="backgroundTint">?attr/windowBackgroundColor</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
+    <style name="ImageViewStyle" >
+        <item name="android:layout_height">@dimen/dp_imageview_width_height</item>
+        <item name="android:layout_width">@dimen/dp_imageview_width_height</item>
+        <item name="android:padding">14dp</item>
+        <item name="android:tint">?attr/iconTintColor</item>
+        <item name="android:contentDescription">@string/iv_content_desc</item>
+    </style>
+
+    <style name="ClickableImageViewStyle" parent="ImageViewStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="EditViewStyle">
+        <item name="android:textSize">@dimen/dp_et_text_size</item>
+        <item name="android:inputType">text</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+    </style>
+</resources>

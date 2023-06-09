@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">XBrowser</string>
+    <string name="tv_home_title">Home</string>
+    <string name="mb_home_window_num">1</string>
+    <string name="et_search_bottom_hint">Search or enter a website address</string>
+    <string name="iv_content_desc">My ImageView</string>
+
+
+</resources>

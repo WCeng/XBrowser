@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">X浏览器</string>
+    <string name="tv_home_title">主页</string>
+    <string name="mb_home_window_num">1</string>
+    <string name="et_search_bottom_hint">搜索或输入网址</string>
+    <string name="iv_content_desc">我的图片</string>
+
+
+</resources>

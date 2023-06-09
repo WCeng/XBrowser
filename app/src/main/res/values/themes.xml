@@ -1,0 +1,27 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.XBrowser" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <!--ordWindow background color-->
+        <item name="android:windowBackground">@color/white</item>
+        <!--text color-->
+        <item name="android:textColor">@color/default_text_color</item>
+        <!-- Customize your theme here. -->
+        <item name="generalBackgroundColor">@color/default_general_bg_color</item>
+        <item name="iconTintColor">@color/default_icon_color</item>
+        <item name="clickRipperColor">@color/default_ripple_color</item>
+        <item name="windowBackgroundColor">@color/white</item>
+
+        <item name="materialButtonStyle">@style/MaterialButtonStyle</item>
+
+    </style>
+</resources>

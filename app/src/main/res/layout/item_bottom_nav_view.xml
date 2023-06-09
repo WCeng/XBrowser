@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButtonMenu"
+            android:layout_width="@dimen/dp_bottom_nav_btn_width"
+            android:layout_height="0dp"
+            app:icon="@drawable/ic_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/materialButtonWindow"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.499" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButtonWindow"
+            android:layout_width="@dimen/dp_bottom_nav_btn_width"
+            android:layout_height="0dp"
+            android:text="@string/mb_home_window_num"
+            android:textColor="?android:textColor"
+            app:icon="@drawable/ic_muti_window"
+            app:iconPadding="-15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/materialButtonMenu"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textViewTitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButtonBack"
+            android:layout_width="@dimen/dp_bottom_nav_btn_width"
+            android:layout_height="0dp"
+            app:icon="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/materialButtonHome"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButtonHome"
+            android:layout_width="@dimen/dp_bottom_nav_btn_width"
+            android:layout_height="0dp"
+            app:icon="@drawable/ic_home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textViewTitle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/materialButtonBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="@dimen/dp_bottom_nav_title_width"
+            android:layout_height="0dp"
+            android:background="@drawable/background_radius_corner"
+            android:gravity="center"
+            android:text="@string/tv_home_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/materialButtonWindow"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/materialButtonHome"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
