@@ -18,10 +18,13 @@ import java.util.List;
 public class Window extends PageContainer {
 
     private final WindowController mWindowController;
-    private String mTitle;
     private IWindowListener mWindowListener;
     private final IPageFactory mPageFactory;
+    private final WindowInfo mWindowInfo;
 
+    /**
+     * 窗口事件监听器
+     */
     interface IWindowListener {
         // 当窗口标题被更新时调用
         void onTitleUpdate(String title);
@@ -38,6 +41,7 @@ public class Window extends PageContainer {
         super(context);
         mWindowController = new WindowController();
         mPageFactory = new PageFactory();
+        mWindowInfo = new WindowInfo();
     }
 
     public IPageFactory getPageFactory() {
@@ -52,6 +56,17 @@ public class Window extends PageContainer {
         return getAllPages().size() > 1;
     }
 
+    public WindowInfo getWindowInfo() {
+        return mWindowInfo;
+    }
+
+    /**
+     * 窗口信息实体类
+     */
+    public final static class WindowInfo {
+        public String title;
+        public String url;
+    }
 
     /**
      * Window控制器
@@ -83,7 +98,7 @@ public class Window extends PageContainer {
                 }
             }
             WebPage webPage = mPageFactory.createWebPage();
-            webPage.loadUrl(url);
+            getWindowInfo().url = url;
             addPage(webPage);
             showPage(webPage);
         }

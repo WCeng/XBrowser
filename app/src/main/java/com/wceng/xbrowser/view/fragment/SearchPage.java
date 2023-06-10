@@ -49,7 +49,7 @@ public class SearchPage extends BasePage {
 
     private void initView() {
         KeyboardUtils.showKeyboard(requireContext(), mBinding.inputSearchText);
-        mBinding.inputSearchText.setText("https://baidu.com");
+        mBinding.inputSearchText.setText(getWindow().getWindowInfo().url);
     }
 
     private void inputEventListener() {

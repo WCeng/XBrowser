@@ -16,7 +16,6 @@ import com.wceng.xbrowser.web.XWebView;
 import com.wceng.xbrowser.widget.Window;
 
 public class WebPage extends BasePage {
-    public static final String TEXT_SEARCH_CONTENT = "text_search_content";
 
     private FragmentWebBinding mBinding;
     private XWebView mWebView;
@@ -43,10 +42,7 @@ public class WebPage extends BasePage {
 
     private void initWebView() {
         mWebView = XWebView.newInstance(requireContext());
-    }
-
-    public void loadUrl(String url){
-        mWebView.loadUrl(url);
+        mWebView.loadUrl(getWindow().getWindowInfo().url);
     }
 
     private void initView() {
