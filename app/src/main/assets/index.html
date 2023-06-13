@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Hello World!</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
-<h1>Hello World!</h1>
-<p>This is an Android app with HTML5 mixed development.</p>
-<button style="border: 1px solid red; width: 100px; height: 200px;">安装</button>
+
+<canvas id="myCanvas" width="500" height="500"></canvas>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+
+    var isDrawing = false;
+    var lastX, lastY;
+
+    // 当鼠标按下时，标记为正在绘画，并记录光标位置
+    canvas.addEventListener("mousedown", function (event) {
+        isDrawing = true;
+        lastX = event.clientX - canvas.offsetLeft;
+        lastY = event.clientY - canvas.offsetTop;
+    });
+
+    // 鼠标移动时，如果正在绘画，则在当前点和上一点之间绘制一条线
+    canvas.addEventListener("mousemove", function (event) {
+        if (isDrawing) {
+            var currentX = event.clientX - canvas.offsetLeft;
+            var currentY = event.clientY - canvas.offsetTop;
+
+            context.beginPath();
+            context.moveTo(lastX, lastY);
+            context.lineTo(currentX, currentY);
+            context.stroke();
+
+            lastX = currentX;
+            lastY = currentY;
+        }
+    });
+
+    // 松开鼠标时，标记为停止绘画
+    canvas.addEventListener("mouseup", function () {
+        isDrawing = false;
+    });
+</script>
+
 </body>
 </html>

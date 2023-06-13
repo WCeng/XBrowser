@@ -15,10 +15,12 @@ import androidx.annotation.NonNull;
 
 import com.wceng.xbrowser.util.Constant;
 
-public class XWebView extends WebView implements XWebViewExtension {
+public class XWebView extends WebView {
 
     private XWebViewClient mWebViewClient;
     private XWebChromeClient mWebChromeClient;
+    private WebViewListener mWebViewListener;
+    private WebViewController mWebViewController;
 
     public static XWebView newInstance(Context context) {
          return new XWebView(context);
@@ -28,11 +30,13 @@ public class XWebView extends WebView implements XWebViewExtension {
         super(context);
         initSettings();
         initClient();
+        mWebViewController = new WebViewControllerImpl();
     }
 
+
     private void initClient() {
-        mWebViewClient = new XWebViewClient();
-        mWebChromeClient = new XWebChromeClient();
+        mWebViewClient = new XWebViewClient(mWebViewListener);
+        mWebChromeClient = new XWebChromeClient(mWebViewListener);
         setWebViewClient(mWebViewClient);
         setWebChromeClient(mWebChromeClient);
     }
@@ -65,9 +69,24 @@ public class XWebView extends WebView implements XWebViewExtension {
         settings.setDatabaseEnabled(true);
     }
 
-    @Override
-    public void setDarkMode() {
+    public final class WebViewControllerImpl implements WebViewController {
 
+        @Override
+        public void setDarkMode(boolean b) {
+
+        }
+
+        @Override
+        public void setPrivateMode(boolean b) {
+
+        }
     }
 
+    public void setWebViewListener(WebViewListener webViewListener){
+        mWebViewListener = webViewListener;
+    }
+
+    public WebViewController getWebViewController() {
+        return mWebViewController;
+    }
 }
