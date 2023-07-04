@@ -84,6 +84,8 @@ public class XWebView extends WebView {
 
     public void setWebViewListener(WebViewListener webViewListener){
         mWebViewListener = webViewListener;
+        mWebViewClient.setWebViewListener(webViewListener);
+        mWebChromeClient.setWebViewListener(webViewListener);
     }
 
     public WebViewController getWebViewController() {

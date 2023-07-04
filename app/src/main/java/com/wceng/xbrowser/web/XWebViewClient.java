@@ -19,6 +19,10 @@ public class XWebViewClient extends WebViewClient {
         this.webViewListener = webViewListener;
     }
 
+    public void setWebViewListener(WebViewListener webViewListener) {
+        this.webViewListener = webViewListener;
+    }
+
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
         String url = request.getUrl().toString();

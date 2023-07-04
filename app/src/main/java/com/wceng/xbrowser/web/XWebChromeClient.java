@@ -13,9 +13,13 @@ import android.webkit.WebView;
 
 public class XWebChromeClient extends WebChromeClient {
 
-    private final WebViewListener webViewListener;
+    private WebViewListener webViewListener;
 
     public XWebChromeClient(WebViewListener webViewListener) {
+        this.webViewListener = webViewListener;
+    }
+
+    public void setWebViewListener(WebViewListener webViewListener){
         this.webViewListener = webViewListener;
     }
 

@@ -6,6 +6,7 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.wceng.xbrowser.bean.WindowInfo;
 import com.wceng.xbrowser.view.fragment.HomePage;
 import com.wceng.xbrowser.view.fragment.SearchPage;
 import com.wceng.xbrowser.view.fragment.WebPage;
@@ -42,6 +43,7 @@ public class Window extends PageContainer {
         mWindowController = new WindowController();
         mPageFactory = new PageFactory();
         mWindowInfo = new WindowInfo();
+        mWindowInfo.updateUrl("https://www.baidu.com");
     }
 
     public IPageFactory getPageFactory() {
@@ -58,14 +60,6 @@ public class Window extends PageContainer {
 
     public WindowInfo getWindowInfo() {
         return mWindowInfo;
-    }
-
-    /**
-     * 窗口信息实体类
-     */
-    public final static class WindowInfo {
-        public String title;
-        public String url;
     }
 
     /**
@@ -98,7 +92,7 @@ public class Window extends PageContainer {
                 }
             }
             WebPage webPage = mPageFactory.createWebPage();
-            getWindowInfo().url = url;
+            getWindowInfo().updateUrl(url);
             addPage(webPage);
             showPage(webPage);
         }

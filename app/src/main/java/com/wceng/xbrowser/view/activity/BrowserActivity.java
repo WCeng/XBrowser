@@ -27,11 +27,11 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
-        initView();
+//        initView();
 
         mWindowContainer.addObserver(mNavView);
 
-        subscribeToModel();
+//        subscribeToModel();
     }
 
     private void initData() {

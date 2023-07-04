@@ -1,10 +1,14 @@
 package com.wceng.xbrowser.view.fragment;
 
+import static android.content.ContentValues.TAG;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.PermissionRequest;
 import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
@@ -40,14 +44,13 @@ public class WebPage extends BasePage {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        mBinding.webViewContainer.addView(mWebView);
+        initWebView();
     }
 
-    public void setWebView(XWebView webView) {
-        mWebView = webView;
+    private void initWebView() {
         mWebView = XWebView.newInstance(requireContext());
-        mWebView.loadUrl(getWindow().getWindowInfo().url);
         mWebView.setWebViewListener(webViewListener);
+        mWebView.loadUrl(getWindow().getWindowInfo().getUrl());
         mBinding.webViewContainer.addView(mWebView);
     }
 
@@ -78,6 +81,12 @@ public class WebPage extends BasePage {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            Log.e(TAG, "onPageStarted: "+url );
+        }
+
+        @Override
+        public void onPermissionRequest(PermissionRequest request) {
+            super.onPermissionRequest(request);
         }
     };
 
