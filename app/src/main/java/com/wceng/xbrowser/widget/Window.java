@@ -43,7 +43,6 @@ public class Window extends PageContainer {
         mWindowController = new WindowController();
         mPageFactory = new PageFactory();
         mWindowInfo = new WindowInfo();
-        mWindowInfo.updateUrl("https://www.baidu.com");
     }
 
     public IPageFactory getPageFactory() {

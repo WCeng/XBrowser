@@ -15,10 +15,6 @@ public class XWebViewClient extends WebViewClient {
 
     private WebViewListener webViewListener;
 
-    public XWebViewClient(WebViewListener webViewListener) {
-        this.webViewListener = webViewListener;
-    }
-
     public void setWebViewListener(WebViewListener webViewListener) {
         this.webViewListener = webViewListener;
     }

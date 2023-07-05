@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 public class WindowInfo {
     private String title;
-    private String url;
+    private String url = "https://www.baidu.com";
     private Bitmap bitmap;
 
     public String getTitle() {

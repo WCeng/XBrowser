@@ -19,7 +19,6 @@ public class XWebView extends WebView {
 
     private XWebViewClient mWebViewClient;
     private XWebChromeClient mWebChromeClient;
-    private WebViewListener mWebViewListener;
     private WebViewController mWebViewController;
 
     public static XWebView newInstance(Context context) {
@@ -35,8 +34,8 @@ public class XWebView extends WebView {
 
 
     private void initClient() {
-        mWebViewClient = new XWebViewClient(mWebViewListener);
-        mWebChromeClient = new XWebChromeClient(mWebViewListener);
+        mWebViewClient = new XWebViewClient();
+        mWebChromeClient = new XWebChromeClient();
         setWebViewClient(mWebViewClient);
         setWebChromeClient(mWebChromeClient);
     }
@@ -83,7 +82,6 @@ public class XWebView extends WebView {
     }
 
     public void setWebViewListener(WebViewListener webViewListener){
-        mWebViewListener = webViewListener;
         mWebViewClient.setWebViewListener(webViewListener);
         mWebChromeClient.setWebViewListener(webViewListener);
     }
