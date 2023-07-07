@@ -4,8 +4,9 @@ import android.graphics.Bitmap;
 
 public class WindowInfo {
     private String title;
-    private String url = "https://www.baidu.com";
+    private String url;
     private Bitmap bitmap;
+    private boolean isPrivate;
 
     public String getTitle() {
         return title;
@@ -29,5 +30,13 @@ public class WindowInfo {
 
     public void updateBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
     }
 }

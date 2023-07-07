@@ -14,7 +14,7 @@ import com.wceng.xbrowser.R;
 import com.wceng.xbrowser.base.BasePage;
 import com.wceng.xbrowser.databinding.FragmentHomeBinding;
 import com.wceng.xbrowser.viewmodel.HomeViewModel;
-import com.wceng.xbrowser.widget.Window;
+import com.wceng.xbrowser.window.Window;
 
 public class HomePage extends BasePage {
 
@@ -40,7 +40,7 @@ public class HomePage extends BasePage {
 
         mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         mBinding.constraintLayout.setOnClickListener(v -> {
-            getWindow().getWindowController().enterSearchPage();
+            getWindow().getPageJumpController().jumpSearch();
         });
     }
 

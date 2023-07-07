@@ -2,6 +2,7 @@ package com.wceng.xbrowser.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,9 @@ import androidx.databinding.DataBindingUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.wceng.xbrowser.R;
 import com.wceng.xbrowser.databinding.ItemBottomNavViewBinding;
-import com.wceng.xbrowser.other.Observable;
 import com.wceng.xbrowser.other.Observer;
+import com.wceng.xbrowser.window.Window;
+import com.wceng.xbrowser.window.WindowListener;
 
 public class XBottomNavigationView extends BottomNavigationView implements Observer {
 
@@ -23,7 +25,7 @@ public class XBottomNavigationView extends BottomNavigationView implements Obser
 
     @Override
     public void onWindowUpdate(Window w) {
-
+        mConnector.connect(w);
     }
 
     public interface IBottomNavClickListener {
@@ -47,11 +49,6 @@ public class XBottomNavigationView extends BottomNavigationView implements Obser
     public XBottomNavigationView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
-        initConnector();
-
-    }
-
-    private void initConnector() {
         mConnector = new Connector(this);
     }
 
@@ -78,10 +75,11 @@ public class XBottomNavigationView extends BottomNavigationView implements Obser
         mBinding.textViewTitle.setText(title);
     }
 
-    public Connector getConnector() {
-        return mConnector;
-    }
 
+
+    /**
+     * window与BottomNavView交互的连接器
+     */
     public final static class Connector {
         private final XBottomNavigationView mNavView;
         private Window mWindow;
@@ -95,24 +93,24 @@ public class XBottomNavigationView extends BottomNavigationView implements Obser
             mNavView.setEventListener(new IBottomNavClickListener() {
                 @Override
                 public void onBack(View view) {
-                    if(mWindow != null){
-                        if(mWindow.canGoBack()){
-                            mWindow.getWindowController().goBack();
+                    if (mWindow != null) {
+                        if (mWindow.canGoBack()) {
+                            mWindow.getPageJumpController().goBack();
                         }
                     }
                 }
 
                 @Override
                 public void onHome(View view) {
-                    if(mWindow != null){
-                        mWindow.getWindowController().enterHomePage();
+                    if (mWindow != null) {
+                        mWindow.getPageJumpController().jumpHome();
                     }
                 }
 
                 @Override
                 public void onTitle(View view) {
-                    if(mWindow != null) {
-                        mWindow.getWindowController().enterSearchPage();
+                    if (mWindow != null) {
+                        mWindow.getPageJumpController().jumpSearch();
                     }
                 }
 
@@ -129,13 +127,13 @@ public class XBottomNavigationView extends BottomNavigationView implements Obser
         }
 
 
-        public void connect(Window window){
+        public void connect(Window window) {
             mWindow = window;
             windowJack(window);
         }
 
-        public void windowJack(Window window){
-            window.setWindowListener(new Window.IWindowListener() {
+        public void windowJack(Window window) {
+            window.setWindowListener(new WindowListener() {
                 @Override
                 public void onTitleUpdate(String title) {
                     mNavView.updateTitle(title);
@@ -145,10 +143,15 @@ public class XBottomNavigationView extends BottomNavigationView implements Obser
                 public void onPageNavigationStateChanged(boolean canGoBack, boolean canGoForward) {
 
                 }
+
+                @Override
+                public void onIconUpdate(Bitmap bitmap) {
+
+                }
             });
         }
 
-        public void disconnect(Window window){
+        public void disconnect(Window window) {
 
         }
 

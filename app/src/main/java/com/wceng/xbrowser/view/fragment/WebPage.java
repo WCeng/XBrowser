@@ -21,7 +21,7 @@ import com.wceng.xbrowser.databinding.FragmentWebBinding;
 import com.wceng.xbrowser.web.WebViewListener;
 import com.wceng.xbrowser.web.WebViewListenerAdapter;
 import com.wceng.xbrowser.web.XWebView;
-import com.wceng.xbrowser.widget.Window;
+import com.wceng.xbrowser.window.Window;
 
 public class WebPage extends BasePage {
 
@@ -44,21 +44,40 @@ public class WebPage extends BasePage {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initWebView();
+        if (mWebView != null)
+            mBinding.webViewContainer.addView(mWebView);
     }
 
-    private void initWebView() {
-        mWebView = XWebView.newInstance(requireContext());
+    public void setWebView(XWebView webView) {
+        mWebView = webView;
         mWebView.setWebViewListener(webViewListener);
         mWebView.loadUrl(getWindow().getWindowInfo().getUrl());
-        mBinding.webViewContainer.addView(mWebView);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mWebView != null) {
+            mWebView.onResume();
+            mWebView.resumeTimers();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mWebView != null) {
+            mWebView.onPause();
+            mWebView.pauseTimers();
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mWebView != null) {
-            mWebView.destroy();
+            mWebView.setWebViewListener(null);
+            mBinding.webViewContainer.removeAllViews();
             mWebView = null;
         }
     }
@@ -81,7 +100,13 @@ public class WebPage extends BasePage {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            Log.e(TAG, "onPageStarted: "+url );
+            Log.e(TAG, "onPageStarted: " + url);
+        }
+
+        @Override
+        public void onReceivedIcon(WebView view, Bitmap icon) {
+            super.onReceivedIcon(view, icon);
+            Log.e(TAG, "onReceivedIcon: "+icon);
         }
 
         @Override

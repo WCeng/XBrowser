@@ -1,6 +1,6 @@
 package com.wceng.xbrowser.other;
 
-import com.wceng.xbrowser.widget.Window;
+import com.wceng.xbrowser.window.Window;
 
 import java.util.ArrayList;
 import java.util.List;

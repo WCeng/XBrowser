@@ -8,7 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.wceng.xbrowser.other.Observable;
-import com.wceng.xbrowser.util.WindowManager;
+import com.wceng.xbrowser.window.WindowManager;
+import com.wceng.xbrowser.window.Window;
 
 public class WindowContainerView extends FrameLayout implements Observable {
 
@@ -20,13 +21,12 @@ public class WindowContainerView extends FrameLayout implements Observable {
 
     public WindowContainerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        mWindowManager = new WindowManager(getContext(), this);
-
-        initWindow();
     }
 
-
-    private void initWindow() {
+    public void init(){
+        mWindowManager = new WindowManager(getContext(), this);
+        WindowManager.IWindowSwitchListener windowSwitchListener = this::notifyAllObservers;
+        mWindowManager.setWindowSwitchListener(windowSwitchListener);
         mWindowManager.addHomeWindow();
     }
 

@@ -18,12 +18,13 @@ import com.wceng.xbrowser.databinding.FragmentSearchBinding;
 import com.wceng.xbrowser.util.KeyboardUtils;
 import com.wceng.xbrowser.util.UrlUtil;
 import com.wceng.xbrowser.viewmodel.SearchViewModel;
-import com.wceng.xbrowser.widget.Window;
+import com.wceng.xbrowser.window.Window;
 
 public class SearchPage extends BasePage {
 
     FragmentSearchBinding mBinding;
     SearchViewModel mViewModel;
+    String bingSearchEngin = "https://cn.bing.com/search?q=";
 
     public static SearchPage newInstance(Window window) {
         SearchPage fragment = new SearchPage();
@@ -102,6 +103,20 @@ public class SearchPage extends BasePage {
     }
 
     private void enterWebPage(String searchStr) {
-        getWindow().getWindowController().enterWebPage(searchStr);
+        if(UrlUtil.isUrl(searchStr)){
+            getWindow().getPageJumpController().jumpWeb(searchStr);
+        }else {
+            getWindow().getPageJumpController().jumpWeb(bingSearchEngin + searchStr);
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden){
+            KeyboardUtils.hideKeyboard(requireContext(), mBinding.inputSearchText);
+        }else {
+            KeyboardUtils.showKeyboard(requireContext(), mBinding.inputSearchText);
+        }
     }
 }

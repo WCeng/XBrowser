@@ -2,27 +2,21 @@ package com.wceng.xbrowser.web;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 
-import com.wceng.xbrowser.util.Constant;
-
 public class XWebView extends WebView {
 
+    private final WebViewController mWebViewController;
     private XWebViewClient mWebViewClient;
     private XWebChromeClient mWebChromeClient;
-    private WebViewController mWebViewController;
+
 
     public static XWebView newInstance(Context context) {
-         return new XWebView(context);
+        return new XWebView(context);
     }
 
     public XWebView(@NonNull Context context) {
@@ -32,12 +26,16 @@ public class XWebView extends WebView {
         mWebViewController = new WebViewControllerImpl();
     }
 
-
     private void initClient() {
         mWebViewClient = new XWebViewClient();
         mWebChromeClient = new XWebChromeClient();
+
         setWebViewClient(mWebViewClient);
         setWebChromeClient(mWebChromeClient);
+    }
+
+    public boolean isShowing() {
+        return getParent() != null;
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -61,7 +59,7 @@ public class XWebView extends WebView {
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         //设置 UserAgent
-        settings.setUserAgentString(Constant.userAgent_android);
+//        settings.setUserAgentString(Constant.userAgent_android);
 
         // 启用本地存储特性
         settings.setDomStorageEnabled(true);
@@ -81,12 +79,12 @@ public class XWebView extends WebView {
         }
     }
 
-    public void setWebViewListener(WebViewListener webViewListener){
-        mWebViewClient.setWebViewListener(webViewListener);
-        mWebChromeClient.setWebViewListener(webViewListener);
-    }
-
     public WebViewController getWebViewController() {
         return mWebViewController;
+    }
+
+    public void setWebViewListener(WebViewListener mWebViewListener) {
+        mWebViewClient.setWebViewListener(mWebViewListener);
+        mWebChromeClient.setWebViewListener(mWebViewListener);
     }
 }

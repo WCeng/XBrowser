@@ -9,12 +9,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.wceng.xbrowser.R;
 import com.wceng.xbrowser.databinding.ActivityBrowserBinding;
-import com.wceng.xbrowser.util.Injection;
-import com.wceng.xbrowser.util.WindowManager;
 import com.wceng.xbrowser.viewmodel.BrowserViewModel;
-import com.wceng.xbrowser.widget.Window;
 import com.wceng.xbrowser.widget.WindowContainerView;
 import com.wceng.xbrowser.widget.XBottomNavigationView;
+import com.wceng.xbrowser.window.Window;
 
 public class BrowserActivity extends AppCompatActivity implements BrowserController {
 
@@ -27,11 +25,8 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
-//        initView();
-
         mWindowContainer.addObserver(mNavView);
-
-//        subscribeToModel();
+        mWindowContainer.init();
     }
 
     private void initData() {
@@ -44,21 +39,11 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
         mWindowContainer = mBinding.windowContainer;
     }
 
-    private void initView() {
-
-    }
-
-    private void subscribeToModel() {
-//        mViewModel.getWindowNum().observe(this, integer -> {
-//            .updateWindowNumber(integer);
-//        });
-    }
-
     @Override
     public void onBackPressed() {
         Window w = mWindowContainer.getCurWindow();
         if (w.canGoBack()) {
-            w.getWindowController().goBack();
+            w.getPageJumpController().goBack();
         } else {
             super.onBackPressed();
         }

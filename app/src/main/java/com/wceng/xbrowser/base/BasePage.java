@@ -2,8 +2,7 @@ package com.wceng.xbrowser.base;
 
 import androidx.fragment.app.Fragment;
 
-import com.wceng.xbrowser.widget.Window;
-import com.wceng.xbrowser.util.WindowManager;
+import com.wceng.xbrowser.window.Window;
 import com.wceng.xbrowser.view.activity.BrowserActivity;
 import com.wceng.xbrowser.view.activity.BrowserController;
 

@@ -62,6 +62,19 @@ public abstract class PageContainer extends FrameLayout {
         setVisibility(VISIBLE);
     }
 
+    public boolean contain(Fragment page){
+        return mPageBackStack.mPageList.contains(page);
+    }
+
+    public Fragment getShowingPage(){
+        List<Fragment> allPages = getAllPages();
+        for (Fragment page: allPages){
+            if(!page.isHidden()){
+                return page;
+            }
+        }
+        return null;
+    }
     /**
      * Page堆放栈
      */

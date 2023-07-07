@@ -1,12 +1,9 @@
-package com.wceng.xbrowser.util;
+package com.wceng.xbrowser.window;
 
 import android.content.Context;
 
-import androidx.fragment.app.FragmentManager;
-
 import com.wceng.xbrowser.view.fragment.HomePage;
 import com.wceng.xbrowser.view.fragment.WebPage;
-import com.wceng.xbrowser.widget.Window;
 import com.wceng.xbrowser.widget.WindowContainerView;
 
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ public class WindowManager {
     private final List<Window> mWindowList;
     private Window mCurrentWindow;
     private final WindowGenerator mWindowGenerator;
+    private IWindowSwitchListener windowSwitchListener;
 
     public WindowManager(
             Context context, WindowContainerView windowContainer) {
@@ -33,17 +31,10 @@ public class WindowManager {
         mWindowList.add(homeWindow);
 
         mWindowContainer.addWindow(homeWindow);
-        showWindow(homeWindow);
+        switchWindow(homeWindow);
     }
 
-    public void addWebWindow(String url) {
-        Window webWindow = mWindowGenerator.createWebWindow(url);
-        mWindowContainer.addWindow(webWindow);
-
-        mWindowList.add(webWindow);
-    }
-
-    private void showWindow(Window w) {
+    private void switchWindow(Window w) {
         for (Window window : mWindowList) {
             if (window != w) {
                 window.hide();
@@ -51,10 +42,18 @@ public class WindowManager {
         }
         w.show();
         mCurrentWindow = w;
+
+        if(windowSwitchListener != null){
+            windowSwitchListener.onSwitch(w);
+        }
     }
 
     public Window getCurWindow() {
         return mCurrentWindow;
+    }
+
+    public void setWindowSwitchListener(IWindowSwitchListener windowSwitchListener) {
+        this.windowSwitchListener = windowSwitchListener;
     }
 
     public int getWindowNum() {
@@ -63,6 +62,10 @@ public class WindowManager {
 
     public void onDestroy() {
 
+    }
+
+    public interface IWindowSwitchListener{
+        void onSwitch(Window window);
     }
 
     /**
@@ -75,19 +78,10 @@ public class WindowManager {
 
         public Window createHomeWindow() {
             Window window = new Window(mContext);
-            HomePage homePage = window.getPageFactory().createHomePage();
-            window.addPage(homePage);
+            window.getPageJumpController().jumpHome();
             return window;
         }
 
-        public Window createWebWindow(String url) {
-            Window window = new Window(mContext);
-            HomePage homePage = window.getPageFactory().createHomePage();
-            WebPage webPage = window.getPageFactory().createWebPage();
-            window.addPage(homePage);
-            window.addPage(webPage);
-            return window;
-        }
     }
 
 }
