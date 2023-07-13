@@ -3,6 +3,7 @@ package com.wceng.xbrowser.web;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
+import android.webkit.WebHistoryItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -26,6 +27,14 @@ public class XWebView extends WebView {
         mWebViewController = new WebViewControllerImpl();
     }
 
+    public int getCurrentIndex(){
+       return copyBackForwardList().getCurrentIndex();
+    }
+
+    public WebHistoryItem getHistoryItemAtIndex(int i){
+        return copyBackForwardList().getItemAtIndex(i);
+    }
+
     private void initClient() {
         mWebViewClient = new XWebViewClient();
         mWebChromeClient = new XWebChromeClient();
@@ -44,8 +53,9 @@ public class XWebView extends WebView {
         //启用 JavaScript
         settings.setJavaScriptEnabled(true);
 
-        //缩放控制和手势缩放
+        //缓存策略
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        //缩放控制和手势缩放
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);

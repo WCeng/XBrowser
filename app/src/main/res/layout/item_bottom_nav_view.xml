@@ -63,6 +63,7 @@
             android:background="@drawable/background_radius_corner"
             android:gravity="center"
             android:text="@string/tv_home_title"
+            android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/materialButtonWindow"
             app:layout_constraintHorizontal_bias="0.5"

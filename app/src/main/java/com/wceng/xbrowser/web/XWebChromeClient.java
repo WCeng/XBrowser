@@ -1,7 +1,10 @@
 package com.wceng.xbrowser.web;
 
+import static android.content.ContentValues.TAG;
+
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.webkit.JsPromptResult;

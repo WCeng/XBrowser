@@ -94,8 +94,9 @@ public class XBottomNavigationView extends BottomNavigationView implements Obser
                 @Override
                 public void onBack(View view) {
                     if (mWindow != null) {
-                        if (mWindow.canGoBack()) {
-                            mWindow.getPageJumpController().goBack();
+                        Window.Navigator navigator = mWindow.getNavigator();
+                        if (navigator.canGoBack()) {
+                            navigator.goBack();
                         }
                     }
                 }

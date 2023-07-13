@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.wceng.xbrowser.util.PageHelper;
 import com.wceng.xbrowser.view.activity.BrowserActivity;
-import com.wceng.xbrowser.view.fragment.HomePage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,7 @@ public abstract class PageContainer extends FrameLayout {
 
     private final PageHelper mPageHelper;
     private final PageBackStack mPageBackStack;
+    private final List<Fragment> mDisplayedPages;
 
     public PageContainer(@NonNull Context context) {
         super(context);
@@ -26,6 +26,7 @@ public abstract class PageContainer extends FrameLayout {
         FragmentManager supportFragmentManager = ((BrowserActivity) context).getSupportFragmentManager();
         mPageHelper = new PageHelper(supportFragmentManager, getId());
         mPageBackStack = new PageBackStack();
+        mDisplayedPages = new ArrayList<>();
     }
 
     public void addPage(Fragment fragment) {
@@ -43,15 +44,12 @@ public abstract class PageContainer extends FrameLayout {
 
     public void showPage(Fragment fragment) {
         mPageHelper.show(fragment);
+        mDisplayedPages.add(fragment);
     }
 
     public void removePage(Fragment fragment) {
         mPageHelper.remove(fragment);
         mPageBackStack.remove(fragment);
-    }
-
-    public void replacePage(Fragment fragment) {
-        mPageHelper.replace(fragment);
     }
 
     public void hide() {
@@ -66,6 +64,15 @@ public abstract class PageContainer extends FrameLayout {
         return mPageBackStack.mPageList.contains(page);
     }
 
+    public void showOnlyPage(Fragment page) {
+        List<Fragment> allPages = getAllPages();
+        for (Fragment fragment : allPages) {
+            if (fragment != page)
+                hidePage(fragment);
+        }
+        showPage(page);
+    }
+
     public Fragment getShowingPage(){
         List<Fragment> allPages = getAllPages();
         for (Fragment page: allPages){
@@ -75,6 +82,15 @@ public abstract class PageContainer extends FrameLayout {
         }
         return null;
     }
+
+    public Fragment getPreDisplayedPage() {
+        if(mDisplayedPages.size() < 2){
+            return null;
+        }else {
+            return mDisplayedPages.get(mDisplayedPages.size() - 2);
+        }
+    }
+
     /**
      * Page堆放栈
      */

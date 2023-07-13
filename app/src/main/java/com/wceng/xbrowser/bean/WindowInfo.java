@@ -12,7 +12,7 @@ public class WindowInfo {
         return title;
     }
 
-    public void updateTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -20,7 +20,7 @@ public class WindowInfo {
         return url;
     }
 
-    public void updateUrl(String url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -28,7 +28,7 @@ public class WindowInfo {
         return bitmap;
     }
 
-    public void updateBitmap(Bitmap bitmap) {
+    public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
 

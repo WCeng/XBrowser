@@ -21,5 +21,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </FrameLayout>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/processBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_web_process_bar_height"
+            app:layout_constraintBottom_toBottomOf="@+id/webViewContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

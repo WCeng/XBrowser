@@ -41,9 +41,9 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
 
     @Override
     public void onBackPressed() {
-        Window w = mWindowContainer.getCurWindow();
-        if (w.canGoBack()) {
-            w.getPageJumpController().goBack();
+        Window.Navigator navigator = mWindowContainer.getCurWindow().getNavigator();
+        if (navigator.canGoBack()) {
+            navigator.goBack();
         } else {
             super.onBackPressed();
         }
